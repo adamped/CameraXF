@@ -20,7 +20,8 @@ namespace CameraSample
         {
             var photo = await Plugin.Media.CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions() { });
 
-            PhotoImage.Source = ImageSource.FromStream(() => { return photo.GetStream(); });
+            if (photo != null)
+                PhotoImage.Source = ImageSource.FromStream(() => { return photo.GetStream(); });
         }
     }
 }
