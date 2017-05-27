@@ -12,6 +12,15 @@ namespace CameraSample
         public MainPage()
         {
             InitializeComponent();
+
+            CameraButton.Clicked += CameraButton_Clicked;
+        }
+
+        private async void CameraButton_Clicked(object sender, EventArgs e)
+        {
+            var photo = await Plugin.Media.CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions() { });
+
+            PhotoImage.Source = ImageSource.FromStream(() => { return photo.GetStream(); });
         }
     }
 }
